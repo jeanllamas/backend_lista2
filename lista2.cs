@@ -184,18 +184,68 @@ namespace backend_lista2
 
         static void Exercicio2()
         {
+            int n, pares = 0, impares = 1;
+
+            Console.WriteLine("Exercício 2 - N números pares e ímpares" + Environment.NewLine);
+
+            Console.Write("Digite um número: ");
+            n = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine(Environment.NewLine + $"Primeiros {n} números pares");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write(pares + " ");
+                pares += 2;
+            }
+
+            Console.WriteLine(Environment.NewLine + Environment.NewLine + $"Primeiros {n} números ímpares");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write(impares + " ");
+                impares += 2;
+            }
+
+            Console.WriteLine();
         }
 
         static void Exercicio3()
         {
+            int numero = 1, produto = 1;
+
+            Console.WriteLine("Exercício 3 - Produto dos números" + Environment.NewLine);
+
+            while (numero != 0)
+            {
+                Console.Write("Digite um número:  ");
+                numero = Convert.ToInt32(Console.ReadLine());
+
+                if (numero > 0)
+                {
+                    produto *= numero;
+                    Console.WriteLine(produto + Environment.NewLine);
+                }
+            }
         }
 
         static void Exercicio4()
         {
+            int num;
+
+            Console.WriteLine("Exercício 4 - Tabuada de 0 a 9" + Environment.NewLine);
+
+            Console.WriteLine("Digite um número: ");
+            num = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine(Environment.NewLine + $"Tabuada do {num}");
+            for (int i = 0; i <= 9; i++)
+            {
+                Console.WriteLine($"{num} * {i} = {num * i}");
+            }
         }
 
         static void Exercicio5()
         {
+            Console.WriteLine("Exercício 5 - Maior e menor número" + Environment.NewLine);
         }
 
         static void Exercicio6()
