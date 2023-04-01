@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Metrics;
 using System.Linq;
 
 namespace backend_lista2
@@ -11,8 +12,8 @@ namespace backend_lista2
             do
             {
                 Console.Clear();
-
                 Console.WriteLine("Jean Augusto - Lista 2" + Environment.NewLine);
+
                 for (int i = 1; i <= 15; i++)
                 {
                     Console.WriteLine($"{i} - Exercício {i}");
@@ -26,28 +27,27 @@ namespace backend_lista2
                 {
                     case "sair":
                     case "Sair":
-                        ligado = 0;
+                        ligado = 0; //"Desliga" o programa
                         continue;
                 }
 
                 bool checagem = int.TryParse(entrada, out int num_exercicio); /*Retorna verdadeiro se a conversão da entrada para inteiro der certo
                                                                                 e move o número correspondente ao exercício para uma int */
-
-                switch (num_exercicio)
+                if (checagem)
                 {
-                    //Se for um valor fora do limite ou não for um número, retorna uma mensagem de erro
-                    case < 1 when checagem:
-                    case > 15 when checagem:
-                    default:
-                        Console.WriteLine(Environment.NewLine + "Opção de exercício inválida. Tente novamente.");
-                        break;
-
-                    //Quando o valor estiver dentro do limite, segue normalmente
-                    case >= 1 when checagem:
-                    case <= 15 when checagem:
+                    if (num_exercicio >= 1 && num_exercicio <= 15)
+                    {
                         Console.Clear();
                         Exercicios(num_exercicio); //Encaminha para o exercício escolhido
-                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(Environment.NewLine + $"Não há Exercício {num_exercicio}. Tente novamente.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(Environment.NewLine + "Opção inválida. Tente novamente.");
                 }
 
                 //Mensagem para retornar ou encerrar
@@ -237,49 +237,278 @@ namespace backend_lista2
 
                 case 7: //Exercício 7
                     {
+                        Console.WriteLine("Exercício 7 - Solicitar número" + Environment.NewLine);
+
+                        int numero;
+
+                        do
+                        {
+                            Console.Write("Digite um número: ");
+                            numero = Convert.ToInt32(Console.ReadLine());
+
+                            if (numero < 1 || numero > 4)
+                            {
+                                Console.WriteLine(Environment.NewLine + "entrada inválida" + Environment.NewLine);
+                            }
+                            else
+                            {
+                                Console.WriteLine(Environment.NewLine + numero);
+                            }
+                        } while (numero < 1 || numero > 4);
                         break;
                     }
 
                 case 8: //Exercício 8
                     {
+                        Console.WriteLine("Exercício 8 - Nome de trás pra frente" + Environment.NewLine);
+
+                        string nome, invertido;
+
+                        Console.Write("Digite um nome: ");
+                        nome = Console.ReadLine();
+
+                        invertido = new string(nome.Reverse().ToArray());
+                        Console.Write(Environment.NewLine + $"Nome invertido: {invertido}" + Environment.NewLine);
                         break;
                     }
 
                 case 9: //Exercício 9
                     {
+                        Console.WriteLine("Exercício 9 - Números ímpares até 100" + Environment.NewLine);
+
+                        Console.WriteLine("Os números ímpares de 1 até 100 são:");
+                        for (int impares = 1; impares < 100; impares += 2)
+                        {
+                            Console.Write(impares + " ");
+
+                            switch (impares)
+                            {
+                                case 19:
+                                case 39:
+                                case 59:
+                                case 79:
+                                case 99:
+                                    Console.Write(Environment.NewLine);
+                                    break;
+                            }
+                        }
                         break;
                     }
 
                 case 10: //Exercício 10
                     {
+                        Console.WriteLine("Exercício 10 - Média de notas de uma turma" + Environment.NewLine);
+
+                        float qtd_estudantes, soma_notas = 0;
+
+                        Console.Write("Quantos estudantes há na turma? ");
+                        qtd_estudantes = Convert.ToSingle(Console.ReadLine());
+                        Console.WriteLine("");
+
+                        for (int i = 1; i <= qtd_estudantes; i++)
+                        {
+                            Console.Write($"Insira a nota do {i}º estudante: ");
+                            soma_notas += Convert.ToSingle(Console.ReadLine());
+                        }
+
+                        Console.WriteLine(Environment.NewLine + $"A média da turma é {(soma_notas / qtd_estudantes):0.000}");
                         break;
                     }
 
                 case 11: //Exercício 11
                     {
+                        Console.WriteLine("Exercício 11 - Maior número" + Environment.NewLine);
+
+                        int i = 0, maior = 0;
+                        int[] numeros = new int[10]; 
+
+                        while (i < 10)
+                        {
+                            Console.Write($"Digite o {i + 1}º número: ");
+                            numeros[i] = Convert.ToInt32(Console.ReadLine());
+                            
+                            if (numeros[i] > maior)
+                            {
+                                maior = numeros[i];
+                            }
+
+                            i++;
+                        }
+
+                        Console.WriteLine(Environment.NewLine + $"Maior número: {maior}");
                         break;
                     }
 
                 case 12: //Exercício 12
                     {
+                        Console.WriteLine("Exercício 12 - 1 a 100 com for, while e do-while" + Environment.NewLine);
+
+                        int i = 1;
+
+                        Console.WriteLine("1 a 100 com for");
+                        for (i = 1; i <= 100; i++)
+                        {
+                            Console.Write(i + " ");
+                            switch (i)
+                            {
+                                case 25:
+                                case 50:
+                                case 75:
+                                case 100:
+                                    Console.Write(Environment.NewLine);
+                                    break;
+                            }
+                        }
+                        i = 1;
+
+                        Console.WriteLine(Environment.NewLine + "1 a 100 com while");
+                        while (i <= 100)
+                        {
+                            Console.Write(i + " ");
+                            switch (i)
+                            {
+                                case 25:
+                                case 50:
+                                case 75:
+                                case 100:
+                                    Console.Write(Environment.NewLine);
+                                    break;
+                            }
+                            i++;
+                        }
+                        i = 1;
+
+                        Console.WriteLine(Environment.NewLine + "1 a 100 com do-while");
+                        do
+                        {
+                            Console.Write(i + " ");
+                            switch (i)
+                            {
+                                case 25:
+                                case 50:
+                                case 75:
+                                case 100:
+                                    Console.Write(Environment.NewLine);
+                                    break;
+                            }
+                            i++;
+                        } while (i <= 100);
                         break;
                     }
 
                 case 13: //Exercício 13
                     {
+                        Console.WriteLine("Exercício 13 - Quadrado, cubo e raiz quadrada" + Environment.NewLine);
+
+                        double numero, quadrado, cubo, raiz;
+
+                        do
+                        {
+                            Console.Write("Digite um número: ");
+                            numero = Convert.ToDouble(Console.ReadLine());
+
+                            if (numero > 0)
+                            {
+                                quadrado = Math.Pow(numero, 2);
+                                cubo = Math.Pow(numero, 3);
+                                raiz = Math.Sqrt(numero);
+
+                                Console.WriteLine($"{numero}² = {(quadrado):0.00}");
+                                Console.WriteLine($"{numero}³ = {(cubo):0.00}");
+                                Console.WriteLine($"√{numero} = {(raiz):0.00}" + Environment.NewLine);
+                            }
+                        } while (numero > 0);
                         break;
                     }
 
                 case 14: //Exercício 14
                     {
+                        int repetir = 1;
+                        do
+                        {
+                            Console.WriteLine("Exercício 14 - Conversor de velocidade" + Environment.NewLine);
+
+                            Console.WriteLine("1 - km/h para m/s");
+                            Console.WriteLine("2 - m/s para km/h");
+                            Console.Write(Environment.NewLine + "Selecione uma opção: ");
+                            var entrada = Console.ReadLine();
+
+                            bool checagem = int.TryParse(entrada, out int tipo);
+
+                            if (checagem)
+                            {
+                                switch (tipo)
+                                {
+                                    case 1: //km/h para m/s
+                                        {
+                                            Console.WriteLine(Environment.NewLine + "Converter km/h para m/s");
+
+                                            Console.Write("Velocidade em km/h: ");
+                                            float kmh = Convert.ToSingle(Console.ReadLine());
+
+                                            Console.WriteLine(Environment.NewLine + $"{kmh} km/h equivalem a {(kmh / 3.6):0.00} m/s");
+                                            break;
+                                        }
+
+                                    case 2: //m/s para km/h
+                                        {
+                                            Console.WriteLine(Environment.NewLine + "Converter m/s para km/h");
+
+                                            Console.Write("Velocidade em m/s: ");
+                                            float ms = Convert.ToSingle(Console.ReadLine());
+
+                                            Console.WriteLine(Environment.NewLine + $"{ms} m/s equivalem a {(ms * 3.6):0.00} km/h");
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            Console.WriteLine(Environment.NewLine + $"Não há opção {tipo}. Tente novamente.");
+                                            break;
+                                        }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(Environment.NewLine + "Opção inválida. Tente novamente.");
+                            }
+
+                            Console.WriteLine(Environment.NewLine + "Fazer outra conversão? (S/N)");
+                            var voltar = Console.ReadLine();
+
+                            switch (voltar)
+                            {
+                                case "S":
+                                case "s":
+                                    Console.Clear();
+                                    continue;
+                                default:
+                                    repetir = 0;
+                                    continue;
+                            }
+                        } while (repetir == 1);
                         break;
                     }
 
                 case 15: //Exercício 15
                     {
+                        Console.WriteLine("Exercício 15 - Salário atual do funcionário" + Environment.NewLine);
+
+                        double salario = 2000.0;
+                        int ano_atual = DateTime.Now.Year;
+
+                        salario *= 1.015;
+
+                        double aumento = 30;
+
+                        Console.WriteLine("Salário em");
+                        for (int ano = 2007; ano <= ano_atual; ano++)
+                        {
+                            salario += aumento*2;
+                            aumento *= 2;
+                            Console.WriteLine($"{ano} com R${aumento:0.00} de aumento: R${salario:0.00}");
+                        }
                         break;
                     }
-
             }
         }
     }
